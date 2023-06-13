@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 
-import { Board } from './Board'
+import  Board from './Board'
 
 // game logice will happen here, eventually
 const Game = () => {

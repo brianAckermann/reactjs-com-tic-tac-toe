@@ -15,21 +15,19 @@ function Board({ xIsNext, squares, onPlay }) {
 
     const handleSquareClicked = (index) => {
     
-    const nextSquares = squares.slice();
+        if (winner) { 
+            return;
+        } 
+        
+        const nextSquares = squares.slice();
 
-    // check if we already have a value
-    if (nextSquares[index] == null) {
-        nextSquares[index] = xIsNext ? "X" : "O";
-        onPlay(nextSquares);
-
-      let win = calculateWinner(nextSquares);
- /*      if (win) { 
-        console.log("winner is ", win);
-        setWinner(win);
-      } */
-    } else {
-      console.log("invalid placement!", nextSquares[index]);
-    }
+        // check if we already have a value
+        if (nextSquares[index] == null) {
+            nextSquares[index] = xIsNext ? "X" : "O";
+            onPlay(nextSquares);
+        } else {
+            console.log("invalid placement!", nextSquares[index]);
+        }
 
    };
 

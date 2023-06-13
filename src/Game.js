@@ -5,16 +5,15 @@ import  Board from './Board'
 
 const Game = () => {
   
-    const [xIsNext, setXIsNext] = useState(true);
     const [history, setHistory] = useState([Array(9).fill(null)]);
     const [currentMove, setCurrentMove] = useState(0);
+    const xIsNext = currentMove % 2 === 0;
     
     const currentSquares = history[currentMove];
 
 
     const handlePlay = (nextSquares) => { 
         const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
-        setXIsNext(!xIsNext);                   /// state updates cause host component to reload
         setHistory(nextHistory);  /// state updates cause host component to reload
         setCurrentMove(nextHistory.length - 1);
     }
@@ -22,9 +21,6 @@ const Game = () => {
     const jumpTo = (nextMove) => { 
         console.log("jump to move ", nextMove);
         setCurrentMove(nextMove);   /// state updates cause host component to reload
-
-        //update the player what what should be the next move.
-        setXIsNext(nextMove % 2 === 0);  /// state updates cause host component to reload
     }
 
     const moves = history.map((squares, moveNum) => { 

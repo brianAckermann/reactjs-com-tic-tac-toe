@@ -31,5 +31,5 @@ const Game = () => {
 }
 
 
-export {Game} ;
+export default Game;
 

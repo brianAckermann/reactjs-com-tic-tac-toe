@@ -5,15 +5,15 @@ import  Square  from './Square'
 
 
 function Board({ xIsNext, squares, onPlay }) {
-  const [winner, setWinner] = useState(null);
+  //const [winner, setWinner] = useState(null);
   //console.log(setWinner);
+    const winner = calculateWinner(squares);
+    const playStatus = winner ?
+        "Winner is " + winner :
+        "Next Player is " + (xIsNext ? 'X' : 'O');
 
-  const handleSquareClicked = (index) => {
-    
-    if (winner) { 
-      console.log("winner is ", winner);
-      return
-    }
+
+    const handleSquareClicked = (index) => {
     
     const nextSquares = squares.slice();
 
@@ -23,10 +23,10 @@ function Board({ xIsNext, squares, onPlay }) {
         onPlay(nextSquares);
 
       let win = calculateWinner(nextSquares);
-      if (win) { 
+ /*      if (win) { 
         console.log("winner is ", win);
         setWinner(win);
-      }
+      } */
     } else {
       console.log("invalid placement!", nextSquares[index]);
     }
@@ -35,9 +35,9 @@ function Board({ xIsNext, squares, onPlay }) {
 
   return (
     <>
-        {!!winner &&
-        <div>WINNER is &quot;{winner}&quot;</div>
-        }
+       
+        <div>{playStatus}</div>
+        
       <div className="board-row">
         <Square value={[squares[0]]} onSquareClick={ () => handleSquareClicked(0) }/>
         <Square value={[squares[1]]} onSquareClick={  () => handleSquareClicked(1) }/>

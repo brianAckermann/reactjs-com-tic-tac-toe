@@ -4,10 +4,7 @@ import  Square  from './Square'
 
 
 
-function Board() {
-
-  const [squares, setSquares] = useState(Array(9).fill(null));
-  const [xIsNext, setXIsNext] = useState(true);
+function Board({ xIsNext, squares, onPlay }) {
   const [winner, setWinner] = useState(null);
   //console.log(setWinner);
 
@@ -22,9 +19,8 @@ function Board() {
 
     // check if we already have a value
     if (nextSquares[index] == null) {
-      nextSquares[index] = xIsNext ? "X" : "O";
-      setXIsNext(!xIsNext);
-      setSquares(nextSquares);
+        nextSquares[index] = xIsNext ? "X" : "O";
+        onPlay(nextSquares);
 
       let win = calculateWinner(nextSquares);
       if (win) { 
@@ -62,8 +58,9 @@ function Board() {
 }
 
 Board.propTypes = {
-  board: PropTypes.array,
-  //onSquareClick: PropTypes.func,
+    squares: PropTypes.array,
+    xIsNext: PropTypes.bool,
+    onPlay: PropTypes.func
 }
 
 
